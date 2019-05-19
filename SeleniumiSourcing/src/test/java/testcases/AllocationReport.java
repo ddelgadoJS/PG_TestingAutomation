@@ -1,5 +1,6 @@
 package testcases;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -19,6 +21,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class AllocationReport {
 	public static String browser = "Chrome";
+	public static String downloadFilePath = "C:\\Users\\delgado.jd.6\\Downloads\\TemporalSeleniumDownloads";
 	public static WebDriver driver;
 	
 	public static WebDriver getWebDriver(String browser) {
@@ -42,6 +45,17 @@ public class AllocationReport {
 		TimeUnit.SECONDS.sleep(10);
 		while (driver.findElement(By.id("loaderText")).isDisplayed())
 			TimeUnit.SECONDS.sleep(10);
+	}
+
+	public static ChromeOptions setChromeOptions(String downloadFilePath) {
+		// Set download file path and automatic downloads.
+		// TO-DO. FIND OUT WHY IT'S NOT FINDING THE ELEMENTS.
+		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+		chromePrefs.put("profile.default_content_settings.popups", 0);
+		chromePrefs.put("download.default_directory", downloadFilePath);
+		ChromeOptions options = new ChromeOptions();
+		options.setExperimentalOption("prefs", chromePrefs);
+		return options;
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
