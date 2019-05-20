@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class AllocationReport {
+public class StrategyReport {
 	public static String browser = "Chrome";
 	public static String downloadFilePath = "C:\\Users\\delgado.jd.6\\Downloads\\TemporalSeleniumDownloads";
 	public static WebDriver driver;
@@ -75,9 +75,9 @@ public class AllocationReport {
 	public static void main(String[] args) throws InterruptedException {
 		driver = getWebDriver(browser);
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-		WebDriverWait explicitWait = new WebDriverWait(driver, 20);
+		WebDriverWait explicitWait = new WebDriverWait(driver, 50);
 		
 		FluentWait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver);
 		fluentWait.withTimeout(Duration.ofSeconds(60));
@@ -95,7 +95,7 @@ public class AllocationReport {
 		// 1. Initial iSourcing screen, select My Reports option.
 		// To wait for PingID. Delete if there are credentials that don't require it.
 		explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("My Reports"))).click(); // My Reports tab
-		driver.findElement(By.xpath("//a[@ng-click='RedirectToAllocationReport()']")).click(); // Allocation report
+		driver.findElement(By.xpath("//a[@ng-click='RedirectToStrategyReport()']")).click(); // Strategy report
 		
 		// 2. Inside Allocation Report screen, create a NNIT report.
 		driver.findElement(By.name("reportName")).sendKeys("NNIT"); // Report name text field
