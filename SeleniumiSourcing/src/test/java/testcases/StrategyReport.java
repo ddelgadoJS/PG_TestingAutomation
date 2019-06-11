@@ -29,6 +29,7 @@ public class StrategyReport {
 	public static String browser = "Chrome";
 	public static String downloadFilePath = "C:\\Users\\delgado.jd.6\\Downloads\\TemporalSeleniumDownloads";
 	public static WebDriver driver;
+	public static String user, password = "";
 	
 	public static WebDriver getWebDriver(String browser) {
 		if (browser.equals("Chrome")) {
@@ -88,8 +89,8 @@ public class StrategyReport {
 		driver.get("https://isourcingqa.pg.com/");
 		
 		// 0. Login page.
-		driver.findElement(By.id("username")).sendKeys("delgado.jd.6"); // Username box
-		driver.findElement(By.id("password")).sendKeys("Afg7g21a"); // Password box
+		driver.findElement(By.id("username")).sendKeys(user); // Username box
+		driver.findElement(By.id("password")).sendKeys(password); // Password box
 		driver.findElement(By.id("loginButton")).click(); // Login button
 		
 		// 1. Initial iSourcing screen, select My Reports option.
