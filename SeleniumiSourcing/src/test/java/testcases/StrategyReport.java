@@ -27,7 +27,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StrategyReport {
 	public static String browser = "Chrome";
-	public static String downloadFilePath = "C:\\Users\\delgado.jd.6\\Downloads\\TemporalSeleniumDownloads";
+	public static String downloadFilePath = "C:\\Users\\ramirez.jd\\Documents\\Downloads-Selenium";
 	public static WebDriver driver;
 	public static String user, password = "";
 	

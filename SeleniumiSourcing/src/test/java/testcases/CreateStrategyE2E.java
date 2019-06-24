@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Date;
-import java.util.HashMap;
+// import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +14,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+//import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -26,11 +26,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-public class AllocationReport {
+public class CreateStrategyE2E {
 	public static String browser = "Chrome";
 	public static String downloadFilePath = "C:\\Users\\ramirez.jd\\Documents\\Downloads-Selenium";
 	public static WebDriver driver;
-	public static String user, password = "";
+	public static String username = "ramirez.jd";
+	public static String password = "Son18jer";
 	
 	public static WebDriver getWebDriver(String browser) {
 		if (browser.equals("Chrome")) {
@@ -49,22 +50,26 @@ public class AllocationReport {
 		return null;
 	}
 
-	public static void waitReportDownload(WebDriver driver) throws InterruptedException {
-		TimeUnit.SECONDS.sleep(10);
-		while (driver.findElement(By.id("loaderText")).isDisplayed())
-			TimeUnit.SECONDS.sleep(10);
-	}
+//	public static void waitReportDownload(WebDriver driver) throws InterruptedException {
+//		TimeUnit.SECONDS.sleep(10);
+//		while (driver.findElement(By.id("loaderText")).isDisplayed())
+//			TimeUnit.SECONDS.sleep(10);
+//	}
 
-	public static ChromeOptions setChromeOptions(String downloadFilePath) {
-		// Set download file path and automatic downloads.
-		// TO-DO. FIND OUT WHY IT'S NOT FINDING THE ELEMENTS.
-		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-		chromePrefs.put("profile.default_content_settings.popups", 0);
-		chromePrefs.put("download.default_directory", downloadFilePath);
-		ChromeOptions options = new ChromeOptions();
-		options.setExperimentalOption("prefs", chromePrefs);
-		return options;
-	}
+//	/**
+//	 * @param downloadFilePath
+//	 * @return
+//	 */
+//	public static ChromeOptions setChromeOptions(String downloadFilePath) {
+//		// Set download file path and automatic downloads.
+//		// TO-DO. FIND OUT WHY IT'S NOT FINDING THE ELEMENTS.
+//		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+//		chromePrefs.put("profile.default_content_settings.popups", 0);
+//		chromePrefs.put("download.default_directory", downloadFilePath);
+//		ChromeOptions options = new ChromeOptions();
+//		options.setExperimentalOption("prefs", chromePrefs);
+//		return options;
+//	}
 	
 	public static void captureScreenshot() throws IOException {
 		Date d = new Date();
@@ -90,14 +95,14 @@ public class AllocationReport {
 		driver.get("https://isourcingqa.pg.com/");
 		
 		// 0. Login page.
-		driver.findElement(By.id("username")).sendKeys(user); // Username box
+		driver.findElement(By.id("username")).sendKeys(username); // Username box
 		driver.findElement(By.id("password")).sendKeys(password); // Password box
 		driver.findElement(By.id("loginButton")).click(); // Login button
 		
 		// 1. Initial iSourcing screen, select My Reports option.
 		// To wait for PingID. Delete if there are credentials that don't require it.
-		explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("My Reports"))).click(); // My Reports tab
-		driver.findElement(By.xpath("//a[@ng-click='RedirectToAllocationReport()']")).click(); // Allocation report
+		explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("CREATE A STRATEGY"))).click(); // My Reports tab
+		//driver.findElement(By.xpath("//a[@ng-click='RedirectToAllocationReport()']")).click(); // Allocation report
 		
 		// 2. Inside Allocation Report screen, create a NNIT report.
 		driver.findElement(By.name("reportName")).sendKeys("NNIT"); // Report name text field
@@ -132,7 +137,7 @@ public class AllocationReport {
 		TimeUnit.SECONDS.sleep(2);
 		driver.findElement(By.xpath("//input[@ng-click='triggerDownloadReport()']")).click(); // Download Report button
 		
-		waitReportDownload(driver);
+//		waitReportDownload(driver);
 		
 		driver.quit();
 	}
