@@ -1,4 +1,4 @@
-package testcases;
+package iSourcing;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -23,13 +23,13 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import components.Credentials;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class AllocationReport {
-	public static String browser = "Chrome";
-	public static String downloadFilePath = "C:\\Users\\delgado.jd.6\\Downloads\\TemporalSeleniumDownloads";
-	public static WebDriver driver;
-	public static String user, password = "";
+	static String browser = "Chrome";
+	static String downloadFilePath = "C:\\Users\\delgado.jd.6\\Downloads\\TemporalSeleniumDownloads";
+	static WebDriver driver;
 	
 	public static WebDriver getWebDriver(String browser) {
 		if (browser.equals("Chrome")) {
@@ -74,11 +74,13 @@ public class AllocationReport {
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
+		Credentials credentials = new Credentials();
+		
 		driver = getWebDriver(browser);
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
-		WebDriverWait explicitWait = new WebDriverWait(driver, 20);
+		WebDriverWait explicitWait = new WebDriverWait(driver, 60);
 		
 		FluentWait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver);
 		fluentWait.withTimeout(Duration.ofSeconds(60));
@@ -89,8 +91,8 @@ public class AllocationReport {
 		driver.get("https://isourcingqa.pg.com/");
 		
 		// 0. Login page.
-		driver.findElement(By.id("username")).sendKeys(user); // Username box
-		driver.findElement(By.id("password")).sendKeys(password); // Password box
+		driver.findElement(By.id("username")).sendKeys(credentials.user); // Username box
+		driver.findElement(By.id("password")).sendKeys(credentials.password); // Password box
 		driver.findElement(By.id("loginButton")).click(); // Login button
 		
 		// 1. Initial iSourcing screen, select My Reports option.

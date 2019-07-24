@@ -1,4 +1,6 @@
-package testcases;
+package iSourcing;
+import components.Credentials;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -74,11 +76,13 @@ public class StrategyReport {
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
+		Credentials credentials = new Credentials();
+		
 		driver = getWebDriver(browser);
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
-		WebDriverWait explicitWait = new WebDriverWait(driver, 50);
+		WebDriverWait explicitWait = new WebDriverWait(driver, 60);
 		
 		FluentWait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver);
 		fluentWait.withTimeout(Duration.ofSeconds(60));
@@ -89,8 +93,8 @@ public class StrategyReport {
 		driver.get("https://isourcingqa.pg.com/");
 		
 		// 0. Login page.
-		driver.findElement(By.id("username")).sendKeys(user); // Username box
-		driver.findElement(By.id("password")).sendKeys(password); // Password box
+		driver.findElement(By.id("username")).sendKeys(credentials.user); // Username box
+		driver.findElement(By.id("password")).sendKeys(credentials.password); // Password box
 		driver.findElement(By.id("loginButton")).click(); // Login button
 		
 		// 1. Initial iSourcing screen, select My Reports option.
